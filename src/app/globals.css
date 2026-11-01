@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* SevaDesk palette: soft teal + leaf green (care, growth), warm saffron accent, gentle neutrals. */
+@theme {
+  --font-sans: var(--font-inter), var(--font-tamil), system-ui, sans-serif;
+  --color-teal-50: #effaf8;
+  --color-teal-100: #d5f1ec;
+  --color-teal-600: #1f7a70;
+  --color-teal-700: #17645c;
+  --color-teal-800: #124f49;
+  --color-leaf-100: #e3f3dc;
+  --color-leaf-600: #3f7d2c;
+  --color-leaf-700: #326423;
+  --color-saffron-100: #fdeed8;
+  --color-saffron-500: #e8891c;
+  --color-saffron-700: #9a5408;
+}
+
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --surface-2: #f3f1ec;
+  --text: #1f2a2a;
+  --muted: #55625f;
+  --border: #ded9cf;
+  --focus: #e8891c;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #121a19;
+  --surface: #1a2423;
+  --surface-2: #22302e;
+  --text: #ecf2f0;
+  --muted: #a9b8b4;
+  --border: #33433f;
+  color-scheme: dark;
+}
+
+html.large-text {
+  font-size: 118%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.field {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.6rem 0.8rem;
+}
+
+textarea.field {
+  min-height: 7rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--color-teal-700);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-teal-800);
+}
+.btn-accent {
+  background: var(--color-saffron-500);
+  color: #1f1300;
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.btn-danger {
+  background: #b42318;
+  color: #fff;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .no-print,
+  nav,
+  header,
+  footer {
+    display: none !important;
+  }
+  .card {
+    border: none;
+    padding: 0;
+  }
+  .print-page {
+    break-after: page;
+  }
+}
+
+/* Scoped printing: printScoped() adds .print-scope to <body>; only .print-target prints. */
+.print-target-hidden {
+  display: none;
+}
+@media print {
+  body.print-scope * {
+    visibility: hidden;
+  }
+  body.print-scope .print-target,
+  body.print-scope .print-target * {
+    visibility: visible;
+  }
+  body.print-scope .print-target {
+    display: block !important;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+  }
+  .certificate {
+    break-after: page;
+    min-height: 92vh;
+  }
+}
